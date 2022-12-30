@@ -4,6 +4,7 @@
  */
 package pws.a.contoh.a;
 
+import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,15 +21,9 @@ public class contohController {
     Barang data = new Barang();
     BarangJpaController actrl = new BarangJpaController();
     
-    @RequestMapping("/getName/{id}")
-    public String getName(@PathVariable("id") int id){
-        try {
-                data = actrl.findBarang(id);
-                return data.getNama()+"<br>"+data.getJumlah();
-            }
-        
-        catch (Exception error){return "Data Tidak Ada";}
-    
+    @RequestMapping("/getAll")
+    public List<Barang> viewAll(){
+        return actrl.findBarangEntities();
     }
     
     @RequestMapping("/delete/{id}")
